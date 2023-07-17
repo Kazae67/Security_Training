@@ -40,5 +40,9 @@ if(isset($_GET["action"])) {
                 // problème de saisie dans les chmpas de formulaire
             }
         break;
+
+        case"login": 
+            //connexion à l'application
+        break;
     }
 }
