@@ -9,8 +9,8 @@ $password2 = "monMotdePasse1234";
 // Ne génère pas à chaque refresh, hashage FAIBLE court
 $md5 = hash('md5', $password);
 $md5_2 = hash('md5', $password2);
-// echo $md5."<br>";
-// echo $md5_2."<br>";
+echo $md5."<br>";
+echo $md5_2."<br>";
 
 // Ne génère pas à chaque refresh, hashage FAIBLE un peu plus long
 $sha256 = hash('sha256', $password);
@@ -39,8 +39,8 @@ $sha256_2 = hash('sha256', $password2);
   // PASSWORD_BCRYPT
  $bcrypt = password_hash($password, PASSWORD_BCRYPT);
  $bcrypt_2 = password_hash($password2, PASSWORD_BCRYPT);
-//  echo $bcrypt."<br>";
-//  echo $bcrypt_2."<br>";
+echo $bcrypt."<br>";
+echo $bcrypt_2."<br>";
 
 
  // Saisie dans le formulaire de login
