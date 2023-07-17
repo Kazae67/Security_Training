@@ -43,6 +43,42 @@ if(isset($_GET["action"])) {
 
         case"login": 
             //connexion à l'application
+
+            if($_POST["submit"]){
+            // connexion à la base de données
+                $pdo = new PDO("mysql:host=localhost; dbname=security_training; charset=utf8", "root", "");
+
+                // filtrer les champs (faille XSS)
+                $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+                $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                // si les filtres sont valides
+                if($email && $password){
+                    $requete = $pdo->prepare("SELECT * FROM user WHERE email = :email");
+                    $requete->execute(["email" => $email]);
+                    $user = $requete->fetch();
+                    // var_dump($user);die;
+                    // Est-ce que l'utilisateur existe;
+                    if($user){
+                        $hash = $user["password"];
+                        if(password_verify($password, $hash)) {
+                            $_SESSION["user"] = $user;
+                            header("Location: home.php"); exit;
+                        } else {
+                            header("Location: login.php"); exit;
+                            // message utilisateur inconnu ou mot de passe incorrect
+                        }
+                    } else {
+                        // message utilisateur inconnu ou mot de passe incorrect
+                        header("Location: login.php"); exit;
+                    }
+                }
+            }
+
+            header("Location: login.php"); exit;
+        
+
+        case "logout":
         break;
     }
 }
