@@ -46,7 +46,6 @@ if(isset($_GET["action"])) {
 
             // par défaut j'affiche le formulaire d'inscription
             header("Location: register.php"); exit;
-        break;
 
         case "login": 
             //connexion à l'application
@@ -83,8 +82,7 @@ if(isset($_GET["action"])) {
             }
 
             header("Location: login.php"); exit;
-        break;
-        
+
         case "logout":
             // Destruction de toutes les variables de session.
             $_SESSION = array();
