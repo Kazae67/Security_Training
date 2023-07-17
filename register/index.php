@@ -1,4 +1,5 @@
 <?php
+session_start();
 $password = "monMotdePasse1234";
 $password2 = "monMotdePasse1234";
 
@@ -46,5 +47,15 @@ $sha256_2 = hash('sha256', $password2);
  $saisie = "monMotdePasse1234";
 
  $check = password_verify($saisie, $hash);
+ $user = "Kaz";
  var_dump($check);
+ // Si vérification $saisie, $hash, l'utilisateur entre en session.
+if(password_verify($saisie, $hash)){
+    echo "les mots de passe correspondent ! <br>";
+    $_SESSION["user"] = $user;
+    echo $user." est connecté !";
+} else {
+    echo "les mots de passe ne correspondent pas ! <br>";
+}
+
 ?>
